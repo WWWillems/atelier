@@ -39,3 +39,7 @@ if [[ "${OS}" == 'ubuntu' && ("${CODENAME}" == 'lucid' || "${CODENAME}" == 'prec
 
     touch /.puphpet-stuff/ubuntu-required-libraries
 fi
+
+#install Curl
+echo 'Installing Curl'
+sudo apt-get install php5-curl

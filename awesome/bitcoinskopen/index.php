@@ -1,9 +1,14 @@
-<?php session_start();
+<?php
+
+    session_start();
+
     // store session data
     $_SESSION['views']+=1;
 
-
  ?>
+
+
+
 
 
 <!DOCTYPE html>
@@ -30,6 +35,8 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+
+        <h4>DAG MARA!</h4>
 
         <form action="welcome.php" method="post">
             Aantal: <input type="text" name="txtAmount"><br>
