@@ -1,0 +1,3 @@
+[submodule "awesome/bitcoinskopen/lib/mollie"]
+	path = awesome/bitcoinskopen/lib/mollie
+	url = https://github.com/mollie/mollie-api-php.git
