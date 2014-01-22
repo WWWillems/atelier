@@ -6,7 +6,8 @@ data = configValues['vagrantfile-local']
 Vagrant.configure("2") do |config|
   config.vm.box = "#{data['vm']['box']}"
   config.vm.box_url = "#{data['vm']['box_url']}"
-
+  config.vm.network :forwarded_port, host: 4567, guest: 80
+ 
   if data['vm']['hostname'].to_s != ''
     config.vm.hostname = "#{data['vm']['hostname']}"
   end

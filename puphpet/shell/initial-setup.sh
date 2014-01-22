@@ -42,4 +42,4 @@ fi
 
 #install Curl
 echo 'Installing Curl'
-sudo apt-get install php5-curl
+sudo apt-get -y install php5-curl
