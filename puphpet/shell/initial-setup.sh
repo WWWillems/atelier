@@ -43,3 +43,6 @@ fi
 #install Curl
 echo 'Installing Curl'
 sudo apt-get -y install php5-curl
+
+#WEBSERVER
+sudo php -S localhost:8080 -t awesome awesome/bitcoinskopen/index.php

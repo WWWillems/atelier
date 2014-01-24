@@ -9,6 +9,15 @@
 # # CROSS-ORIGIN RESOURCE SHARING (CORS)                                       #
 # ##############################################################################
 
+# /web/.htaccess
+#<IfModule mod_rewrite.c>
+#    Options -MultiViews
+
+  #  RewriteEngine On
+ #   RewriteCond %{REQUEST_FILENAME} !-f
+#    RewriteRule ^ index.php [L]
+#</IfModule>
+
 # ------------------------------------------------------------------------------
 # | Cross-domain AJAX requests                                                 |
 # ------------------------------------------------------------------------------
