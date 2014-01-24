@@ -96,6 +96,51 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+html, body{
+    height: 100%;
+    width: 100%;
+    margin:0;
+    padding:0;
+}
+
+
+#master_container{
+    margin:0px;
+    padding:0px;
+    height:100%;
+}
+
+header {
+    margin: 0;
+    margin-top:-20px;
+    padding: 0;
+    height: 3em;
+    width: 100%;
+    background-color: #333333;
+}
+
+#content{
+    padding-bottom: 10em;
+}
+
+footer{
+    height: 3em;
+    width: 100%;
+    background-color: #a7a7a7;
+    position: absolute;
+    margin-top: 10em;
+}
+
+#currentPriceContainer{
+    height: 3em;
+    color: #999999;
+}
+
+#currentPrice{
+    height: 3em;
+    color: #9dcc4d;
+}
+
 
 
 

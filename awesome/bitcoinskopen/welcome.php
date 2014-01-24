@@ -5,7 +5,7 @@
         /*
          * Example 1 - How to prepare a new payment with the Mollie API.
          */
-        require_once dirname(__FILE__) . "/lib/mollie/src/Mollie/API/Autoloader.php";
+        require_once dirname(__FILE__) . "./lib/mollie/src/Mollie/API/Autoloader.php";
 
         try
         {

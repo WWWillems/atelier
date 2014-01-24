@@ -12,18 +12,39 @@
     $bs = new Bitstamp($KEY, $SECRET, "");
 
     print("" . $KEY . "<br />");
-    print("" . $SECRET . "<br />");
-
-    print_r($bs->ticker());*/
+    print("" . $SECRET . "<br />");*/
 
 
-   //header('Content-type: application/json');
-    //$strJSON = file_get_contents('https://www.bitstamp.net/api/ticker/');
-    //$objJSON = eval("(function(){return " + $strJSON + ";})()");
-  // echo $strJSON
+
+    function getBitstampTicker(){
+        $url = "https://www.bitstamp.net/api/ticker/";
+
+        //  Initiate curl
+        $ch = curl_init();
+        // Disable SSL verification
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // Will return the response, if false it print the response
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Set the url
+        curl_setopt($ch, CURLOPT_URL,$url);
+        // Execute
+        $result=curl_exec($ch);
+
+        // TEST DUMP
+        // Will dump a beauty json :3
+        //var_dump(json_decode($result, true));
+
+        $response = json_decode($result);
+
+        //print $response->{'bid'};
+
+        return  $response->{'bid'};
+    }
+
+    getBitstampTicker();
  ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html >
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -32,7 +53,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title></title>
+        <title>My test project</title>
 
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,8 +63,10 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
 
+        <link rel="shortcut icon" href="/favicon.ico" />
+
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
@@ -51,79 +74,12 @@
 
         <!-- MY CODE -->
         <script type="text/javascript">
-            // 3
             $(document).ready(function() {
-                $.ajax({
-                    type: "GET",
-                    url: "https://www.bitstamp.net/api/ticker/",
-                    async: false,
-                    beforeSend: function(x) {
-                        if(x &amp;&amp; x.overrideMimeType) {
-                            x.overrideMimeType("application/j-son;charset=UTF-8");
-                        }
-                    },
-                    dataType: "json",
-                    success: function(data){
-                        //do your stuff with the JSON data
-
-                        console.log("SUCCES");
-                    }
-                });
+                console.log("> Document ready!");
 
 
-                $("#driver").click(function(event){
-                    $.getJSON('https://www.bitstamp.net/api/ticker/', function(jd) {
-                        json.parse(jd);
-
-                        $('#stage').html('<p> High: ' + jd.high + '</p>');
-                        $('#stage').append('<p>Low : ' + jd.low+ '</p>');
-                        $('#stage').append('<p>Volume: ' + jd.volume+ '</p>');
-                    });
-                });
             });
 
-            // 2
-            $(document).ready(function() {
-                $("#driver").click(function(event){
-                    $.getJSON('https://www.bitstamp.net/api/ticker/', function(jd) {
-                        json.parse(jd);
-
-                        $('#stage').html('<p> High: ' + jd.high + '</p>');
-                        $('#stage').append('<p>Low : ' + jd.low+ '</p>');
-                        $('#stage').append('<p>Volume: ' + jd.volume+ '</p>');
-                    });
-                });
-            });
-
-
-            // 1
-           /* $(document).ready(function(){
-                var url = 'https://www.bitstamp.net/api/ticker/';
-                $.ajax({
-                    type: 'GET',
-                    url: 'https://www.bitstamp.net/api/ticker/',
-                    dataType: 'json',
-                    success: jsonParser
-                });
-
-                $.getJSON(url, function(data){
-                    function jsonParser(json){
-                        $.each(function(k,v){
-                            var last = v.last;
-                            var high = v.high;
-                            var low = v.low;
-                            var time = v.timestamp;
-
-                            //$('#container').append('<div><p id="last">'+last+'</p><p id="high">'+high+'</p><p id="low">'+low+'</p><p id="time">'+time+'</p></div>');
-                        });
-                    };
-                });
-
-            });*/
-
-
-
-            //$('#container').append('<br/><p>End of code flag</p>');
         </script>
     </head>
     <body>
@@ -131,36 +87,32 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+    <div id="master_container">
+        <header>
+            <h4 id="currentPriceContainer">Price: <span id="currentPrice"><?php echo getBitstampTicker(); ?></span></h4>
+        </header>
+
         <h3>Welkom!</h3>
 
-        <h4 id="currentPrice"></h4>
 
-        <p>
-            <ul id="container">
-
-            </ul>
-        </p>
-
-        <p>Click on the button to load result.html file:</p>
-        <div id="stage">
-            STAGE
+        <div id="content">
+            <form action="welcome.php" method="post">
+                Aantal: <input type="text" name="txtAmount"><br>
+                Adres: <input type="text" name="txtAddress"><br>
+                <input type="submit">
+            </form>
         </div>
-        <input type="button" id="driver" value="Load Data" />
 
-        <form action="welcome.php" method="post">
-            Aantal: <input type="text" name="txtAmount"><br>
-            Adres: <input type="text" name="txtAddress"><br>
-            <input type="submit">
-        </form>
-
-        <?php
+        <footer>
+            <?php
             print("This page has been viewed " . getPageViews() . " times");
 
             function getPageViews(){
                 return $_SESSION['views'];
             }
-        ?>
-     
+            ?>
+        </footer>
+    </div>
 
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
